@@ -191,7 +191,7 @@ const ResponsivePage = ({ setSortByName, setSortByPrice, setKategori }) => {
     <div className="w-full flex justify-center max-lg:my-8 max-lg:mt-36">
       <button
         onClick={() => setDrawerOpen(true)}
-        className="rounded bg-indigo-500 px-4 py-2 text-white transition-colors hover:bg-indigo-600"
+        className="rounded bg-sky-400 text-black px-4 py-2 dark:text-white transition-colors hover:bg-indigo-600"
       >
         Filter
       </button>
