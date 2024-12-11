@@ -47,9 +47,7 @@ const Hero = () => {
               menjadi bagian dari pengalaman belanja Anda. Temukan berbagai
               produk berkualitas dengan harga yang ramah di kantong, serta
               layanan yang dirancang untuk memberikan kenyamanan dan kepuasan
-              bagi Anda. Mari mulai perjalanan belanja Anda bersama kami, dan
-              rasakan kemudahan serta kepercayaan yang hanya bisa Anda dapatkan
-              di Renz Shop.
+              bagi Anda.
             </motion.p>
             <motion.div variants={FADE_DOWN_ANIMATION_VARIANTS}>
               <Link

@@ -1,6 +1,9 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
-import Theme from "../diasy/theme";
+// import Theme from "../diasy/theme";
+
+import Theme from "../diasy/Theme";
+
 import imageSrc from "../../assets/g.jpg";
 
 export const Header = () => {
