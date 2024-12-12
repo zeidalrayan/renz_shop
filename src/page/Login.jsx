@@ -9,27 +9,18 @@ const Login = () => {
       <Header />
       <div class="mx-auto h-full sm:w-max">
         <div class="m-auto  py-12">
-          <div class="space-y-4">
-            <a href="">
-              <img
-                src="images/tailus.svg"
-                class="w-40 dark:hidden"
-                alt="tailus logo"
-              />
-              <img
-                src="images/logo.svg"
-                class="w-40 hidden dark:block"
-                alt="tailus logo"
-              />
-            </a>
-          </div>
           <div class="mt-12 rounded-3xl border bg-gray-50 dark:border-gray-700 dark:bg-gray-800 -mx-6 sm:-mx-10 p-8 sm:p-10">
             <h3 class="text-2xl font-semibold text-gray-700 dark:text-white">
-              Login to your account
+              Login ke akun anda
             </h3>
             <div class="mt-12 flex flex-wrap sm:grid gap-6 grid-cols-2">
               <button class="w-full h-11 rounded-full border border-gray-300/75 bg-white px-6 transition active:bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:hover:bg-gray-800 dark:hover:border-gray-700">
                 <div class="w-max mx-auto flex items-center justify-center space-x-4">
+                  <img
+                    src="https://cdn1.iconfinder.com/data/icons/google-s-logo/150/Google_Icons-09-512.png"
+                    alt=""
+                    className=" size-8"
+                  />
                   <span class="block w-max text-sm font-semibold tracking-wide text-cyan-700 dark:text-white">
                     With Google
                   </span>
@@ -58,7 +49,7 @@ const Login = () => {
                   <input
                     id=""
                     type="email"
-                    placeholder="Your email or user name"
+                    placeholder="Email Anda"
                     class="w-full bg-transparent pb-3  border-b border-gray-300 dark:placeholder-gray-300 dark:border-gray-600 outline-none  invalid:border-red-400 transition"
                   />
                 </div>
@@ -69,7 +60,7 @@ const Login = () => {
                   <input
                     id=""
                     type="Your password"
-                    placeholder="Your Password"
+                    placeholder="Password"
                     class="w-full bg-transparent pb-3  border-b border-gray-300 dark:placeholder-gray-300 dark:border-gray-600 outline-none  invalid:border-red-400 transition"
                   />
                 </div>
@@ -77,13 +68,13 @@ const Login = () => {
                   <Link to={"/register"}>
                     <button type="reset" class="-mr-3 w-max p-3">
                       <span class="text-sm tracking-wide text-sky-600 dark:text-sky-400">
-                        You don't have account?
+                        Tidak punya akun?
                       </span>
                     </button>
                   </Link>
                   <button type="reset" class="-mr-3 w-max p-3">
                     <span class="text-sm tracking-wide text-sky-600 dark:text-sky-400">
-                      Forgot password ?
+                      Lupa Password
                     </span>
                   </button>
                 </div>
@@ -99,23 +90,7 @@ const Login = () => {
               </div>
             </form>
           </div>
-          <div class="border-t pt-12 text-gray-500 dark:border-gray-800">
-            <div class="space-x-4 text-center">
-              <span>&copy; Tailus</span>
-              <a
-                href="#"
-                class="text-sm hover:text-sky-900 dark:hover:text-gray-300"
-              >
-                Contact
-              </a>
-              <a
-                href="#"
-                class="text-sm hover:text-sky-900 dark:hover:text-gray-300"
-              >
-                Privacy & Terms
-              </a>
-            </div>
-          </div>
+          <div class="border-t pt-12 text-gray-500 dark:border-gray-800"></div>
         </div>
       </div>
       <Footer />
