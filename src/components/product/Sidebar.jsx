@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import { useSearchParams } from "react-router-dom";
 
 const Sidebar = ({ setSortByName, setSortByPrice, setKategori }) => {
   const [selectedHarga, setSelectedHarga] = useState("");
   const [selectedNama, setSelectedNama] = useState("");
   const [selectedKategori, setSelectedKategori] = useState([]);
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const handleHargaChange = (filter) => {
     setSelectedHarga(filter);
@@ -18,8 +20,10 @@ const Sidebar = ({ setSortByName, setSortByPrice, setKategori }) => {
   const handleResetFilter = () => {
     setSelectedHarga("");
     setSelectedNama("");
+    setSelectedKategori([]);
     setSortByPrice("");
     setSortByName("");
+    setSearchParams({}); // Clear search parameters
   };
 
   const handleKategori = (category) => {
@@ -29,6 +33,9 @@ const Sidebar = ({ setSortByName, setSortByPrice, setKategori }) => {
 
     setSelectedKategori(updatedKategori);
     setKategori(updatedKategori);
+
+    // Update search parameters in the URL
+    setSearchParams({ k: updatedKategori.join(",") });
   };
 
   return (

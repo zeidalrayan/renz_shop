@@ -4,11 +4,15 @@ import { Link, useLocation } from "react-router-dom";
 
 import Theme from "../diasy/Theme";
 
-import imageSrc from "../../assets/g.jpg";
+import imageSrc from "../../../public/g.jpg";
+import { useAuth } from "../../utils/store/useAuth";
+import { h2 } from "framer-motion/client";
+import { FaShoppingCart } from "react-icons/fa";
 
 export const Header = () => {
   const location = useLocation();
-
+  const { user } = useAuth();
+  console.log(user);
   return (
     <div>
       <header>
@@ -29,7 +33,6 @@ export const Header = () => {
                   aria-label="logo"
                   class="flex space-x-2 items-center"
                 >
-                  <img src={imageSrc} alt="a" class="m-auto h-10" />
                   <span class="text-base font-bold text-gray-600 dark:text-white">
                     Renz Shop
                   </span>
@@ -100,16 +103,34 @@ export const Header = () => {
                 </div>
 
                 <div class="w-full items-center gap-7 place-items-center space-y-2 border-primary/10 dark:border-gray-500 border-gray-800 flex flex-col  sm:flex-row lg:space-y-0 md:w-max lg:border-l ml-5 max-lg:ml-0">
-                  <a
-                    href="#"
-                    class="relative ml-4  max-lg:ml-0 flex h-9 max-lg:mb-4  items-center justify-center sm:px-6 before:absolute before:inset-0 before:rounded-full  max-md:w-1/5 before:bg-sky-700 dark:before:bg-primaryLight before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95"
-                  >
-                    <Link to={"/login"}>
-                      <span class="relative text-sm font-semibold dark:text-white text-white ">
-                        Login
-                      </span>
-                    </Link>
-                  </a>
+                  {user ? (
+                    <>
+                      <a
+                        href="#"
+                        class="relative ml-4  max-lg:ml-0 flex h-9 max-lg:mb-4  items-center justify-center sm:px-6 before:absolute before:inset-0 before:rounded-full  max-md:w-1/5 before:bg-sky-700 dark:before:bg-primaryLight before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95"
+                      >
+                        <Link to={"/welcome"}>
+                          <span class="relative text-sm font-semibold dark:text-white text-white ">
+                            profile
+                          </span>
+                        </Link>
+                      </a>
+                      <Link to={"/keranjang"}>
+                        <FaShoppingCart />
+                      </Link>
+                    </>
+                  ) : (
+                    <a
+                      href="#"
+                      class="relative ml-4  max-lg:ml-0 flex h-9 max-lg:mb-4  items-center justify-center sm:px-6 before:absolute before:inset-0 before:rounded-full  max-md:w-1/5 before:bg-sky-700 dark:before:bg-primaryLight before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95"
+                    >
+                      <Link to={"/login"}>
+                        <span class="relative text-sm font-semibold dark:text-white text-white ">
+                          Login
+                        </span>
+                      </Link>
+                    </a>
+                  )}
                   <Theme />
                 </div>
               </div>

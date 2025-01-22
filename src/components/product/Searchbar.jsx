@@ -1,16 +1,16 @@
 import React from "react";
 
-export default function Searchbar({ handlerSearch }) {
+export default function Searchbar({ searchproduk, setsearchproduk }) {
   return (
     <div className="flex items-center w-full justify-center mb-8">
       <div className="relative w-1/2">
         <input
-          className="appearance-none border-2 w-full  pl-10 border-gray-300 hover:border-gray-400 transition-colors rounded-md  py-2 px-3 text-gray-800 dark:text-white leading-tight focus:outline-none focus:ring-purple-600 focus:border-purple-600 focus:shadow-outline"
+          className="appearance-none border-2 w-full pl-10 border-gray-300 hover:border-gray-400 transition-colors rounded-md py-2 px-3 text-gray-800 dark:text-white leading-tight focus:outline-none focus:ring-purple-600 focus:border-purple-600 focus:shadow-outline"
           type="text"
-          placeholder="Search..."
-          onChange={(e) => handlerSearch(e.target.value)}
+          placeholder="Cari barang..."
+          value={searchproduk}
+          onChange={(e) => setsearchproduk(e.target.value)}
         />
-
         <div className="absolute left-0 inset-y-0 flex items-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"

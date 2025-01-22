@@ -3,11 +3,10 @@ import Card from "../home/Card";
 import useFormatRupiah from "../formatRupiah";
 import Searchbar from "./Searchbar";
 
-const Allproduct = ({ product, isLoading }) => {
+const Allproduct = ({ product, isLoading, searchProduk, setsearchProduk }) => {
   const { formatrupiah } = useFormatRupiah();
   const [showSkeleton, setShowSkeleton] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
-  const [search, setSearch] = useState("");
   const itemsPerPage = 5;
 
   const truncateText = (text, maxLength) => {
@@ -21,9 +20,9 @@ const Allproduct = ({ product, isLoading }) => {
     }
   }, [isLoading]);
 
-  // Filter produk berdasarkan pencarian
+  // Filter Produk berdasarkan pencarian
   const filteredProducts = product?.filter((item) =>
-    item.nama_barang.toLowerCase().includes(search.toLowerCase())
+    item.nama_barang.toLowerCase().includes(searchProduk.toLowerCase())
   );
 
   // Data untuk halaman saat ini
@@ -39,44 +38,60 @@ const Allproduct = ({ product, isLoading }) => {
 
   return (
     <section id="product" className="w-[90%] max-lg:w-full">
-      <Searchbar handlerSearch={setSearch} />
-      <div className="grid grid-cols-3  max-lg:grid-cols-2 max-md:grid-cols-1 gap-8 max-md: place-items-center max-md:mt-28">
-        {isLoading || showSkeleton
-          ? Array.from({ length: itemsPerPage }).map((_, index) => (
-              <div
-                key={index}
-                className="flex flex-col space-y-4 p-4 animate-pulse"
-              >
-                <div className="w-full h-28 bg-gray-300 rounded-lg"></div>
-                <div className="w-32 h-4 bg-gray-300 rounded"></div>
-                <div className="w-20 h-4 bg-gray-300 rounded"></div>
-              </div>
-            ))
-          : currentItems?.map((item) => (
-              <Card
-                key={item.id}
-                id={item.id}
-                nama_barang={truncateText(item.nama_barang, 20)}
-                foto_barang={item.foto_barang}
-                harga={formatrupiah(item.harga)}
-              />
-            ))}
+      <div className=" flex justify-center">
+        <input
+          type="text"
+          className="input input-bordered w-1/2 "
+          placeholder="Cari Produk impianmu"
+          value={searchProduk}
+          onChange={(e) => setsearchProduk(e.target.value)}
+        />
+      </div>
+      <div className="grid grid-cols-3 max-lg:grid-cols-2 max-md:grid-cols-1 gap-8 place-items-center mt-8">
+        {isLoading || showSkeleton ? (
+          Array.from({ length: itemsPerPage }).map((_, index) => (
+            <div
+              key={index}
+              className="flex flex-col space-y-4 p-4 animate-pulse"
+            >
+              <div className="w-full h-28 bg-gray-300 rounded-lg"></div>
+              <div className="w-32 h-4 bg-gray-300 rounded"></div>
+              <div className="w-20 h-4 bg-gray-300 rounded"></div>
+            </div>
+          ))
+        ) : filteredProducts?.length > 0 ? (
+          currentItems.map((item) => (
+            <Card
+              key={item.id}
+              idProduct={item.id}
+              nama_barang={truncateText(item.nama_barang, 20)}
+              foto_barang={item.foto_barang}
+              harga={item.harga}
+            />
+          ))
+        ) : (
+          <p className="text-center text-gray-600 text-lg col-span-3">
+            Barang tidak ditemukan
+          </p>
+        )}
       </div>
 
       {/* Paginasi */}
-      <div className="join mt-5 flex justify-center">
-        {Array.from({ length: totalPages }).map((_, index) => (
-          <button
-            key={index}
-            className={`join-item btn ${
-              currentPage === index + 1 ? "btn-active" : ""
-            }`}
-            onClick={() => setCurrentPage(index + 1)}
-          >
-            {index + 1}
-          </button>
-        ))}
-      </div>
+      {filteredProducts?.length > 0 && (
+        <div className="join mt-5 flex justify-center">
+          {Array.from({ length: totalPages }).map((_, index) => (
+            <button
+              key={index}
+              className={`join-item btn ${
+                currentPage === index + 1 ? "btn-active" : ""
+              }`}
+              onClick={() => setCurrentPage(index + 1)}
+            >
+              {index + 1}
+            </button>
+          ))}
+        </div>
+      )}
     </section>
   );
 };

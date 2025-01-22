@@ -8,6 +8,8 @@ import Support from "../components/home/Support";
 import CTA from "../components/home/CTA";
 import Footer from "../components/tailus/Footer";
 import ProductList from "../components/home/productlist";
+import Floatingbutton from "../components/tailus/Floatingbutton";
+import Currentpage from "../components/Currentpage";
 
 const Home = () => {
   return (
@@ -17,8 +19,11 @@ const Home = () => {
         <Hero />
         <ProductList />
         <ChooseUS />
+
         <Support />
+        <Floatingbutton />
       </div>
+
       <CTA />
       <Footer />
     </>

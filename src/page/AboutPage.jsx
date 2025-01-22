@@ -5,6 +5,8 @@ import Footer from "../components/tailus/Footer";
 import CTA from "../components/home/CTA";
 import Cardabout from "../components/Cardabout";
 import Cardvision from "./Cardvision";
+import Floatingbutton from "../components/tailus/Floatingbutton";
+import Currentpage from "../components/Currentpage";
 
 const Landing = () => {
   return (
@@ -59,10 +61,12 @@ const Landing = () => {
             </svg>
           </div>
         </div>
+        <Floatingbutton />
 
         <Cardabout />
 
         <Cardvision />
+        <Currentpage />
         <CTA />
       </main>
       <Footer />
