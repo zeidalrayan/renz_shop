@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import Footer from "../components/tailus/Footer";
 import { Header } from "../components/tailus/Header";
 import { useAuth } from "../utils/store/useAuth";
@@ -23,8 +23,14 @@ const Register = () => {
     }
 
     try {
-      await register(formdata.full_name, formdata.email, formdata.password);
-      alert("berhasil di tambah");
+      await register(
+        formdata.full_name,
+        formdata.email,
+        formdata.password
+      ).then(() => {
+        alert("Berhasil ditambah!");
+        Navigate("/login"); // Redirect ke halaman login
+      });
     } catch (error) {
       console.log(error);
     }
@@ -132,18 +138,13 @@ const Register = () => {
                   />
                 </div>
                 <div className="">
-                  <Link to={"/register"}>
+                  <Link to={"/Login"}>
                     <button type="reset" class="-mr-3 w-max p-3">
                       <span class="text-sm tracking-wide text-sky-600 dark:text-sky-400">
-                        Tidak punya akun?
+                        Sudah punya akun?
                       </span>
                     </button>
                   </Link>
-                  <button type="reset" class="-mr-3 w-max p-3">
-                    <span class="text-sm tracking-wide text-sky-600 dark:text-sky-400">
-                      Lupa Password
-                    </span>
-                  </button>
                 </div>
               </div>
 

@@ -107,7 +107,7 @@ export const Header = () => {
                       >
                         <Link to={"/welcome"}>
                           <span className="relative text-sm font-semibold dark:text-white text-white">
-                            profile
+                            Profile
                           </span>
                         </Link>
                       </a>
