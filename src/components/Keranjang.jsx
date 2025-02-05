@@ -6,10 +6,10 @@ import Table from "./Table";
 
 const Keranjang = () => {
   const { fetchcart, cart } = useCart();
-  const navigate = useNavigate(); // Gunakan useNavigate
+  const navigate = useNavigate();
 
   const handleBack = () => {
-    navigate(-1); // Mundur satu langkah ke halaman sebelumnya
+    navigate(-1);
   };
 
   useEffect(() => {

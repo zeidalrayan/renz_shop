@@ -29,7 +29,7 @@ const Register = () => {
         formdata.password
       ).then(() => {
         alert("Berhasil ditambah!");
-        Navigate("/login"); // Redirect ke halaman login
+        Navigate("/login");
       });
     } catch (error) {
       console.log(error);

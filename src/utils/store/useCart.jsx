@@ -18,7 +18,7 @@ export const useCart = create((set, get) => ({
     const { data, error } = await supabase
       .from("cart")
       .select("*, barang(foto_barang)")
-      .eq("id_user", userId); // Filter berdasarkan id_user
+      .eq("id_user", userId);
 
     if (!error) {
       set({ cart: data });
@@ -52,7 +52,7 @@ export const useCart = create((set, get) => ({
         .from("cart")
         .update({ jumlah: updateditem.jumlah, harga: updateditem.harga })
         .eq("id", existingitem.id)
-        .eq("id_user", userId); // Pastikan hanya update item milik user
+        .eq("id_user", userId);
 
       if (!error) {
         set((state) => ({
@@ -68,7 +68,7 @@ export const useCart = create((set, get) => ({
         ...item,
         jumlah: 1,
         harga: item.harga,
-        id_user: userId, // Tambahkan ID user
+        id_user: userId,
       };
 
       const { data, error } = await supabase.from("cart").insert([newitem]);
@@ -95,7 +95,7 @@ export const useCart = create((set, get) => ({
       .from("cart")
       .delete()
       .eq("id", id)
-      .eq("id_user", userId); // Pastikan hanya hapus milik user
+      .eq("id_user", userId);
 
     if (!error) {
       set((state) => ({

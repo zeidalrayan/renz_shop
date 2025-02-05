@@ -1,14 +1,14 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "../../utils/store/useAuth";
-import { useCart } from "../../utils/store/useCart"; // Import useCart
+import { useCart } from "../../utils/store/useCart";
 import { FaShoppingCart } from "react-icons/fa";
 import Theme from "../diasy/Theme";
 
 export const Header = () => {
   const location = useLocation();
   const { user } = useAuth();
-  const { cart } = useCart(); // Ambil state cart dari useCart
+  const { cart } = useCart();
 
   return (
     <div>

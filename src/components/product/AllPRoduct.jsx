@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Card from "../home/Card";
-import useFormatRupiah from "../formatRupiah";
-import Searchbar from "./Searchbar";
 
 const Allproduct = ({ product, isLoading, searchProduk, setsearchProduk }) => {
-  const { formatrupiah } = useFormatRupiah();
   const [showSkeleton, setShowSkeleton] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
@@ -20,12 +17,10 @@ const Allproduct = ({ product, isLoading, searchProduk, setsearchProduk }) => {
     }
   }, [isLoading]);
 
-  // Filter Produk berdasarkan pencarian
   const filteredProducts = product?.filter((item) =>
     item.nama_barang.toLowerCase().includes(searchProduk.toLowerCase())
   );
 
-  // Data untuk halaman saat ini
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = filteredProducts?.slice(
@@ -33,7 +28,6 @@ const Allproduct = ({ product, isLoading, searchProduk, setsearchProduk }) => {
     indexOfLastItem
   );
 
-  // Jumlah halaman
   const totalPages = Math.ceil((filteredProducts?.length || 0) / itemsPerPage);
 
   return (
