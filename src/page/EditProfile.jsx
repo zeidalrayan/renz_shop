@@ -64,7 +64,10 @@ const EditProfile = () => {
         title: "Success",
         text: "Profile updated!",
         icon: "success",
-      }).then(() => navigate("/profile"));
+      }).then(() => {
+        navigate("/profile");
+        window.location.reload();
+      });
     } catch (error) {
       console.error(error);
     } finally {
