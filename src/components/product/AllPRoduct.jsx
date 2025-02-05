@@ -47,7 +47,7 @@ const Allproduct = ({ product, isLoading, searchProduk, setsearchProduk }) => {
           onChange={(e) => setsearchProduk(e.target.value)}
         />
       </div>
-      <div className="grid grid-cols-3 max-lg:grid-cols-2 max-md:grid-cols-1 gap-8 place-items-center mt-8">
+      <div className="grid grid-cols-3 max-lg:grid-cols-2 max-md:grid-cols-1 gap-8  place-items-center mt-8">
         {isLoading || showSkeleton ? (
           Array.from({ length: itemsPerPage }).map((_, index) => (
             <div
