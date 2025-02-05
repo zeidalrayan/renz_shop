@@ -74,7 +74,7 @@ const PorductPage = () => {
   return (
     <>
       <Header />
-      <main className="m-4 lg:flex max-lg:flex-col">
+      <main className="m-4 lg:flex max-lg:flex-col mt-24">
         {isSmallScreen ? (
           <ResponsivePage
             setSortByName={setSortByName}

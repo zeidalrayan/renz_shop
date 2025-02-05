@@ -1,44 +1,61 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { FaHistory } from "react-icons/fa";
-import { MdLogout } from "react-icons/md";
+import { useAuth } from "../utils/store/useAuth";
+import { Link, useNavigate } from "react-router-dom";
+import { Header } from "../components/tailus/Header";
 
-const Profile = () => {
+export default function ProfilePage() {
+  const { full_name, avatar_url, email, logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    alert("Logout berhasil");
+    navigate("/");
+  };
+
   return (
-    <div className="bg-gradient-to-r from-indigo-800 to-blue-900 min-h-screen flex items-center justify-center p-4">
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-2xl max-w-4xl w-full p-8 transition-all duration-300 animate-fade-in">
-        <div className="flex flex-col md:flex-row">
-          <div className="md:w-1/3 text-center mb-8 md:mb-0">
-            <img
-              src="https://i.pravatar.cc/300"
-              alt="Profile Picture"
-              className="rounded-full w-48 h-48 mx-auto mb-4 border-4 border-indigo-800 dark:border-blue-900 transition-transform duration-300 hover:scale-105"
-            />
-            <h1 className="text-2xl font-bold text-indigo-800 dark:text-white mb-2">
-              John Doe
-            </h1>
-            <p className="text-gray-600 dark:text-gray-300">
-              Software Developer
-            </p>
-            <button className="mt-4 bg-indigo-800 text-white px-4 py-2 rounded-lg hover:bg-blue-900 transition-colors duration-300">
-              Edit Profile
-            </button>
-          </div>
-          <div className="md:w-2/3 md:pl-8">
-            <Link>
-              <h2 className=" flex place-items-center gap-1 border-b-2 mb-11">
-                <FaHistory /> History
-              </h2>
-            </Link>
-
-            <h2 className=" flex place-items-center gap-1 border-b-2 ">
-              <MdLogout /> Log out
+    <div className="">
+      <Header />
+      <div className="h-screen  flex items-center justify-center bg-gray-100 dark:bg-gray-900 transition-colors">
+        <div className="max-w-lg w-full bg-white dark:bg-gray-800 shadow-lg rounded-lg overflow-hidden p-6 transition-colors">
+          <div className="flex justify-between items-center mb-4">
+            <h2 className="text-xl font-semibold text-gray-800 dark:text-white">
+              Profile
             </h2>
+          </div>
+          <div className="flex flex-col items-center text-center">
+            <img
+              src={avatar_url}
+              alt="Profile"
+              className="size-24 rounded-full border-4 border-gray-300 dark:border-gray-600"
+            />
+            <h5 className="text-lg font-semibold text-gray-800 dark:text-white mt-4">
+              {full_name}
+            </h5>
+            <p className="text-sm text-gray-600 dark:text-gray-400">{email}</p>
+            <div className="mt-4 flex gap-4">
+              <Link
+                to="/editprofile"
+                className="px-4 py-2 text-sm font-medium bg-blue-600 dark:bg-blue-500 text-white rounded-lg hover:bg-blue-500 dark:hover:bg-blue-400 transition"
+              >
+                Edit Profile
+              </Link>
+              <button
+                onClick={handleLogout}
+                className="px-4 py-2 text-sm font-medium bg-red-600 dark:bg-red-500 text-white rounded-lg hover:bg-red-500 dark:hover:bg-red-400 transition"
+              >
+                Log Out
+              </button>
+              <Link
+                to="/"
+                className="px-4 py-2 text-white rounded-lg bg-red-500 hover:bg-red-600 transition"
+              >
+                Back
+              </Link>
+            </div>
           </div>
         </div>
       </div>
     </div>
   );
-};
-
-export default Profile;
+}

@@ -10,11 +10,13 @@ import Detail from "./page/Detail";
 import Counter from "./page/Counter";
 import Profile from "./page/Profile";
 import { useAuth } from "./utils/store/useAuth";
-import Welcome from "./page/ProfilePage";
+import Welcome from "./page/Profile";
 import AuthRouter from "./auth/AuthRouter";
 import AuthUser from "./auth/AuthUser";
 import Keranjang from "./components/Keranjang";
 import { useCart } from "./utils/store/useCart";
+import EditProfile from "./page/EditProfile";
+import ProfilePage from "./page/Profile";
 
 const App = () => {
   const { fetchUser } = useAuth();
@@ -23,6 +25,7 @@ const App = () => {
 
   useEffect(() => {
     fetchUser();
+    fetchcart();
   }, [fetchUser, fetchcart]);
   return (
     <BrowserRouter>
@@ -34,13 +37,14 @@ const App = () => {
         <Route path="/about" element={<Landing />} />
         <Route path="/detail/:id" element={<Detail />} />
         <Route path="/counter" element={<Counter />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route path="/profile" element={<ProfilePage />} />
         <Route element={<AuthUser />}>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
         </Route>
         <Route element={<AuthRouter />}>
           <Route path="/welcome" element={<Welcome />} />
+          <Route path="/editprofile" element={<EditProfile />} />
           <Route path="/keranjang" element={<Keranjang />} />
         </Route>
       </Routes>

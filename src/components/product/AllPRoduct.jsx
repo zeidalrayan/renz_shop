@@ -62,7 +62,7 @@ const Allproduct = ({ product, isLoading, searchProduk, setsearchProduk }) => {
         ) : filteredProducts?.length > 0 ? (
           currentItems.map((item) => (
             <Card
-              key={item.id}
+              key={item.id} // Gunakan id sebagai key
               idProduct={item.id}
               nama_barang={truncateText(item.nama_barang, 20)}
               foto_barang={item.foto_barang}
