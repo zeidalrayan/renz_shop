@@ -279,7 +279,7 @@ export const useCart = create((set, get) => ({
   fetchhistorypayment: async (orderid) => {
     try {
       const respone = await axios.get(
-        `https://midtrans-six.vercel.app/api/payment/payment-status/${orderid}`
+        `http://localhost:5000/api/payment/payment-status/${orderid}`
       );
       console.log(respone.data);
     } catch (error) {
