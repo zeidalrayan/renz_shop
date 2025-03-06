@@ -1,10 +1,14 @@
 import React from "react";
 import { Header } from "../components/tailus/Header";
 import Footer from "../components/tailus/Footer";
+import { Helmet } from "react-helmet-async";
 
 const ContactPage = () => {
   return (
     <section class="bg-white dark:bg-gray-900 mt-6">
+      <Helmet>
+        <title>Hubungi Kami</title>
+      </Helmet>
       <Header />
       <div class="py-8 lg:py-16 px-4 mx-auto max-w-screen-md max-lg:mt-24">
         <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-center text-gray-900 dark:text-white">

@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import { supabase } from "../utils/SupClient";
 import { Header } from "../components/tailus/Header";
 import { motion } from "framer-motion";
+import { Helmet } from "react-helmet-async";
 
 const EditProfile = () => {
   const user = useAuth();
@@ -81,6 +82,9 @@ const EditProfile = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Edit profile</title>
+      </Helmet>
       <Header />
       <div className="h-screen flex items-center justify-center p-5 bg-gray-100 dark:bg-gray-900">
         <motion.div

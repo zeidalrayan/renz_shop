@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { supabase } from "../SupClient";
+import axios from "axios";
 
 export const useCart = create((set, get) => ({
   cart: [],
@@ -103,6 +104,187 @@ export const useCart = create((set, get) => ({
       }));
     } else {
       console.error("Delete error:", error);
+    }
+  },
+
+  incrementitem: async (id) => {
+    const { cart } = get();
+    const item = cart.find((i) => i.id === id);
+    if (item) {
+      const updateditem = {
+        ...item,
+        jumlah: item.jumlah + 1,
+        harga: (item.jumlah + 1) * (item.harga / item.jumlah),
+      };
+      const { error } = await supabase
+        .from("cart")
+        .update({ jumlah: updateditem.jumlah, harga: updateditem.harga })
+        .eq("id", id);
+      if (!error) {
+        set((state) => ({
+          cart: state.cart.map((cartitem) =>
+            cartitem.id === id ? updateditem : cartitem
+          ),
+        }));
+      }
+    }
+  },
+  decrementitem: async (id) => {
+    const { cart, removeFromCart } = get();
+    const item = cart.find((i) => i.id === id);
+    if (item) {
+      if (item) {
+        if (item.jumlah === 1) {
+          if (window.confirm("apakah anda ingin menghapus nya")) {
+            await removeFromCart(id);
+          }
+        } else {
+          const updateditem = {
+            ...item,
+            jumlah: item.jumlah - 1,
+            harga: (item.jumlah - 1) * (item.harga / item.jumlah),
+          };
+          const { error } = await supabase
+            .from("cart")
+            .update({ jumlah: updateditem.jumlah, harga: updateditem.harga })
+            .eq("id", id);
+          if (!error) {
+            set((state) => ({
+              cart: state.cart.map((cartitem) =>
+                cartitem.id === id ? updateditem : cartitem
+              ),
+            }));
+          }
+        }
+      }
+    }
+  },
+
+  handlePayment: async () => {
+    const { cart } = get(); // Ambil data cart dari Zustand
+    const { data: userData, error: userError } = await supabase.auth.getUser();
+
+    if (userError) {
+      console.error("Error fetching user:", userError);
+      return;
+    }
+
+    const userId = userData?.user?.id;
+    if (!userId) {
+      console.error("User ID not found.");
+      return;
+    }
+
+    // Fetch user profile data
+    const { data: profileData, error: profileError } = await supabase
+      .from("profiles")
+      .select("full_name, email") // Ambil field yang diperlukan
+      .eq("id", userId)
+      .single();
+
+    if (profileError) {
+      console.error("Error fetching profile data:", profileError);
+      return;
+    }
+
+    if (cart.length === 0) {
+      alert("Keranjang masih kosong!");
+      return;
+    }
+
+    // Persiapkan item details
+    const itemDetails = cart.map((item) => ({
+      id: item.id_produk,
+      name: item.nama_produk,
+      price: item.harga / item.jumlah, // Harga satuan
+      quantity: item.jumlah,
+    }));
+
+    // Hitung total harga
+    const totalPrice = itemDetails.reduce(
+      (acc, item) => acc + item.price * item.quantity,
+      0
+    );
+
+    const order_id = `ORDER-${Date.now()}-${userId.slice(0, 5)}`; // Generate order ID
+
+    const checkoutData = {
+      transaction_details: {
+        order_id: order_id,
+        gross_amount: totalPrice,
+      },
+      item_details: itemDetails,
+      customer_details: {
+        first_name: profileData.full_name || "Customer",
+        email: profileData.email,
+      },
+    };
+
+    try {
+      const response = await fetch(
+        "http://localhost:5000/api/payment/checkout",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+          body: JSON.stringify(checkoutData),
+        }
+      );
+
+      const result = await response.json();
+
+      if (result.snapToken) {
+        window.snap.pay(result.snapToken, {
+          onSuccess: async function () {
+            // Hapus cart setelah pembayaran berhasil
+            await supabase.from("cart").delete().eq("id_user", userId);
+            set({ cart: [] });
+
+            // **Simpan data ke history**
+            const historyData = cart.map((item) => ({
+              user_id: userId,
+              order_id: order_id,
+              gross_amount: item.harga * item.jumlah, // Harga total per item
+              id_produk: item.id_produk, // ID produk dari cart
+              quantity: item.jumlah,
+            }));
+
+            // Insert ke tabel history
+            const { error: historyError } = await supabase
+              .from("history")
+              .insert(historyData);
+
+            if (historyError) {
+              console.error("Error logging payment history:", historyError);
+            } else {
+              console.log("Payment history logged successfully.");
+              window.location.href = "/history"; // Redirect ke halaman history
+            }
+          },
+          onPending: function (result) {
+            console.log("pending", result);
+          },
+          onError: function (result) {
+            console.log("error", result);
+          },
+        });
+      }
+    } catch (error) {
+      console.error("Payment error:", error);
+    }
+  },
+
+  fetchhistorypayment: async (orderid) => {
+    try {
+      const respone = await axios.get(
+        `http://localhost:5000/api/payment/payment-status/${orderid}`
+      );
+      console.log(respone.data);
+    } catch (error) {
+      console.log("error:", error);
+      return null;
     }
   },
 }));

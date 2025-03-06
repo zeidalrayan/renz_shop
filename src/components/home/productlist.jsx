@@ -62,7 +62,7 @@ const ProductList = () => {
                 id={item.id}
                 nama_barang={truncateText(item.nama_barang, 20)}
                 foto_barang={item.foto_barang}
-                harga={formatrupiah(item.harga)}
+                harga={item.harga}
               />
             ))}
       </div>

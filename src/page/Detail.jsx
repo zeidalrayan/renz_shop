@@ -8,6 +8,7 @@ import useFormatRupiah from "../components/formatRupiah";
 import moment from "moment";
 import "moment/locale/id"; // Import locale Indonesia
 import { BlinkBlur } from "react-loading-indicators";
+import { Helmet } from "react-helmet-async";
 
 const Detail = () => {
   const formatDate = (dateString) => {
@@ -45,6 +46,9 @@ const Detail = () => {
 
   return (
     <div className="">
+      <Helmet>
+        <title>{`Renz shop - ${product?.nama_barang}`}</title>
+      </Helmet>
       <Header />
       <div className="  px-4 ">
         <div className="flex  max-lg:mt-16  flex-col  ">

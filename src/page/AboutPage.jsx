@@ -7,10 +7,14 @@ import Cardabout from "../components/Cardabout";
 import Cardvision from "./Cardvision";
 import Floatingbutton from "../components/tailus/Floatingbutton";
 import Currentpage from "../components/Currentpage";
+import { Helmet } from "react-helmet-async";
 
 const Landing = () => {
   return (
     <>
+      <Helmet>
+        <title>Tentang Renzshop</title>
+      </Helmet>
       <Header />
       <main className=" mt-20">
         <div className="relative pt-16 pb-32 flex content-center items-center justify-center min-h-screen-75 max-lg:mt-20">

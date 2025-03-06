@@ -3,9 +3,10 @@ import { useCart } from "../utils/store/useCart";
 import { Header } from "./tailus/Header";
 import { Link, useNavigate } from "react-router-dom";
 import Table from "./Table";
+import { Helmet } from "react-helmet-async";
 
 const Keranjang = () => {
-  const { fetchcart, cart } = useCart();
+  const { fetchcart, cart, handlePayment } = useCart();
   const navigate = useNavigate();
 
   const handleBack = () => {
@@ -18,6 +19,9 @@ const Keranjang = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Keranjang</title>
+      </Helmet>
       <Header />
       <div className="flex flex-col gap-6 place-items-center my-24">
         <h2 className="text-4xl font-bold mb-16">Keranjang</h2>
@@ -37,7 +41,9 @@ const Keranjang = () => {
           <button className="btn btn-error" onClick={handleBack}>
             Kembali
           </button>
-          <Link className="btn btn-info w-24">Beli</Link>
+          <button className="btn btn-info w-24" onClick={() => handlePayment()}>
+            Beli
+          </button>
         </div>
       </div>
     </>

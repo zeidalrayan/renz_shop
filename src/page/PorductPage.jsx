@@ -9,6 +9,7 @@ import ResponsivePage from "../components/product/Modal";
 import { useMedia } from "use-media";
 import Floatingbutton from "../components/tailus/Floatingbutton";
 import { useSearchParams } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 const PorductPage = () => {
   const [sortByName, setSortByName] = useState("");
@@ -62,6 +63,8 @@ const PorductPage = () => {
     },
   });
 
+  console.log(product?.length);
+
   useEffect(() => {
     const params = {
       ...Object.fromEntries(selectParam),
@@ -73,6 +76,20 @@ const PorductPage = () => {
 
   return (
     <>
+      <Helmet>
+        {searchProduk ? (
+          <title>{`pencarian -${selectParam.get("search")}`}</title>
+        ) : (
+          <title>{`List produk - ${product?.length}`}</title>
+        )}
+        <meta
+          name="description"
+          content="Product Page menyediakan bahan-bahan yang kalian butuhkan"
+        />
+        <meta name="keywords" content="toko online, barang murah" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta httpEquiv="Content-Type" content="text/html;charset=UTF-8" />
+      </Helmet>
       <Header />
       <main className="m-4 lg:flex max-lg:flex-col mt-24">
         {isSmallScreen ? (

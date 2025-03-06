@@ -3,7 +3,8 @@ import Swal from "sweetalert2";
 import { useCart } from "../utils/store/useCart";
 
 const Table = ({ rowsPerPage = 5 }) => {
-  const { fetchcart, cart, removeFromCart } = useCart();
+  const { fetchcart, cart, removeFromCart, decrementitem, incrementitem } =
+    useCart();
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
@@ -66,9 +67,21 @@ const Table = ({ rowsPerPage = 5 }) => {
                 <span className="font-semibold">{item.nama_produk}</span>
               </td>
               <td className="p-2">
+                <button
+                  className="btn btn-primary "
+                  onClick={() => decrementitem(item.id)}
+                >
+                  -
+                </button>
                 <span className="badge badge-ghost text-xs md:text-sm">
                   {item.jumlah}
                 </span>
+                <button
+                  className="btn btn-primary "
+                  onClick={() => incrementitem(item.id)}
+                >
+                  +
+                </button>
               </td>
               <td className="p-2 text-blue-500 font-semibold">
                 {item.harga.toLocaleString("id-ID", {

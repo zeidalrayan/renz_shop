@@ -10,10 +10,15 @@ import Footer from "../components/tailus/Footer";
 import ProductList from "../components/home/productlist";
 import Floatingbutton from "../components/tailus/Floatingbutton";
 import Currentpage from "../components/Currentpage";
+import { Helmet } from "react-helmet-async";
 
 const Home = () => {
   return (
     <>
+      <Helmet>
+        <title>Home</title>
+        <meta name="description" content="Home" />
+      </Helmet>
       <Header />
       <div className="m-5 mt-20">
         <Hero />

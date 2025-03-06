@@ -17,6 +17,7 @@ import Keranjang from "./components/Keranjang";
 import { useCart } from "./utils/store/useCart";
 import EditProfile from "./page/EditProfile";
 import ProfilePage from "./page/Profile";
+import History from "./page/History";
 
 const App = () => {
   const { fetchUser } = useAuth();
@@ -44,6 +45,7 @@ const App = () => {
         </Route>
         <Route element={<AuthRouter />}>
           <Route path="/welcome" element={<Welcome />} />
+          <Route path="/history" element={<History />} />
           <Route path="/editprofile" element={<EditProfile />} />
           <Route path="/keranjang" element={<Keranjang />} />
         </Route>

@@ -2,6 +2,7 @@ import React from "react";
 import { useAuth } from "../utils/store/useAuth";
 import { Link, useNavigate } from "react-router-dom";
 import { Header } from "../components/tailus/Header";
+import { Helmet } from "react-helmet-async";
 
 export default function ProfilePage() {
   const { full_name, avatar_url, email, logout } = useAuth();
@@ -15,6 +16,9 @@ export default function ProfilePage() {
 
   return (
     <div className="">
+      <Helmet>
+        <title>{`Profil - ${full_name}`}</title>
+      </Helmet>
       <Header />
       <div className="h-screen  flex items-center justify-center bg-gray-100 dark:bg-gray-900 transition-colors">
         <div className="max-w-lg w-full bg-white dark:bg-gray-800 shadow-lg rounded-lg overflow-hidden p-6 transition-colors">
