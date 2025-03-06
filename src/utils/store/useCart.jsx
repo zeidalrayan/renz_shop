@@ -222,7 +222,7 @@ export const useCart = create((set, get) => ({
 
     try {
       const response = await fetch(
-        "https://midtrans-six.vercel.app/api/payment/checkout",
+        "https://midtrans-2g65si28n-zeid-alrayans-projects.vercel.app/api/payment/checkout",
         {
           method: "POST",
           headers: {
