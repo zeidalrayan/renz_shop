@@ -44,6 +44,12 @@ export default function ProfilePage() {
               >
                 Edit Profile
               </Link>
+              <Link
+                to={"/history"}
+                className="px-4 py-2 text-sm font-medium bg-green-600 dark:bg-green-500 text-white rounded-lg hover:bg-green-500 dark:hover:bg-green-400 transition"
+              >
+                History
+              </Link>
               <button
                 onClick={handleLogout}
                 className="px-4 py-2 text-sm font-medium bg-red-600 dark:bg-red-500 text-white rounded-lg hover:bg-red-500 dark:hover:bg-red-400 transition"
