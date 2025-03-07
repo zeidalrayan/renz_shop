@@ -26,13 +26,12 @@ const History = () => {
             if (!acc[item.order_id]) {
               acc[item.order_id] = {
                 ...item,
-                gross_amount: item.gross_amount, // Set initial gross_amount
-                jumlah: item.jumlah,
+                gross_amount: item.gross_amount,
                 items: [
                   {
                     nama_barang: item.barang.nama_barang,
                     harga: item.barang.harga,
-                    jumlah: item.jumlah,
+                    quantity: item.quantity, // Gunakan quantity dari database
                   },
                 ],
               };
@@ -40,10 +39,9 @@ const History = () => {
               acc[item.order_id].items.push({
                 nama_barang: item.barang.nama_barang,
                 harga: item.barang.harga,
-                jumlah: item.jumlah,
+                quantity: item.quantity, // Gunakan quantity dari database
               });
 
-              // Tambahkan gross_amount
               acc[item.order_id].gross_amount += item.gross_amount;
             }
             return acc;
@@ -172,13 +170,8 @@ const History = () => {
                     .find((order) => order.order_id === selectedHistory)
                     ?.items.map((item, index) => (
                       <li key={index} className="py-2">
-                        <strong>{item.nama_barang}</strong> x{" "}
-                        {
-                          historyData.find(
-                            (order) => order.order_id === selectedHistory
-                          )?.quantity
-                        }{" "}
-                        - Rp {item.harga}
+                        <strong>{item.nama_barang}</strong> x {item.quantity} -
+                        Rp {item.harga}
                       </li>
                     ))}
                 </ul>
