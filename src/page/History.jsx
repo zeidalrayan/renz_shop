@@ -14,17 +14,19 @@ const History = () => {
     const fetchHistory = async () => {
       const { data, error } = await supabase
         .from("history")
-        .select("*, barang(nama_barang, harga)");
+        .select("*, barang(nama_barang, harga)")
+        .order("created_at", { ascending: false }); // DESCENDING (Terbaru ke Terlama)
 
       if (error) {
         console.error("Error fetching history:", error);
       } else {
-        // Kelompokkan data berdasarkan order_id
+        // Kelompokkan data berdasarkan order_id dan jumlahkan gross_amount
         const groupedData = Object.values(
           data.reduce((acc, item) => {
             if (!acc[item.order_id]) {
               acc[item.order_id] = {
                 ...item,
+                gross_amount: item.gross_amount, // Set initial gross_amount
                 items: [
                   {
                     nama_barang: item.barang.nama_barang,
@@ -39,6 +41,9 @@ const History = () => {
                 harga: item.barang.harga,
                 jumlah: item.jumlah,
               });
+
+              // Tambahkan gross_amount
+              acc[item.order_id].gross_amount += item.gross_amount;
             }
             return acc;
           }, {})
