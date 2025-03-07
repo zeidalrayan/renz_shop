@@ -20,7 +20,7 @@ const Keranjang = () => {
   return (
     <>
       <Helmet>
-        <title>Keranjang</title>
+        <title>Keranjang{cart.length > 0 ? `-${cart.length}` : ""}</title>
       </Helmet>
       <Header />
       <div className="flex flex-col gap-6 place-items-center my-24">

@@ -27,6 +27,7 @@ const History = () => {
               acc[item.order_id] = {
                 ...item,
                 gross_amount: item.gross_amount, // Set initial gross_amount
+                jumlah: item.jumlah,
                 items: [
                   {
                     nama_barang: item.barang.nama_barang,
