@@ -247,7 +247,7 @@ export const useCart = create((set, get) => ({
             const historyData = cart.map((item) => ({
               user_id: userId,
               order_id: order_id,
-              gross_amount: item.harga * item.jumlah, // Harga total per item
+              gross_amount: item.harga, // Harga total per item
               id_produk: item.id_produk, // ID produk dari cart
               quantity: item.jumlah,
             }));
